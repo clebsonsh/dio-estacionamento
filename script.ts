@@ -8,7 +8,13 @@ interface IVeiculo {
   const $ = (query: string) => document.querySelector(query) as HTMLInputElement
 
   function patio() {
-    function ler() {}
+    function ler() {
+      return localStorage.patio ? JSON.parse(localStorage.patio) : []
+    }
+
+    function salvar(veiculos: IVeiculo[]) {
+      localStorage.setItem('paito', JSON.stringify(veiculos))
+    }
 
     function adicionar(veiculo: IVeiculo) {
       const row = document.createElement("tr")
@@ -23,11 +29,13 @@ interface IVeiculo {
       `
 
       $('#patio').appendChild(row)
+
+      console.log([...ler()]);
+      
+      salvar([...ler(), veiculo])
     }
 
     function remover() {}
-
-    function salvar() {}
 
     function render() {}
 

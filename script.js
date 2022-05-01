@@ -2,7 +2,12 @@
 (function () {
     const $ = (query) => document.querySelector(query);
     function patio() {
-        function ler() { }
+        function ler() {
+            return localStorage.patio ? JSON.parse(localStorage.patio) : [];
+        }
+        function salvar(veiculos) {
+            localStorage.setItem('paito', JSON.stringify(veiculos));
+        }
         function adicionar(veiculo) {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -14,9 +19,10 @@
         </td>
       `;
             $('#patio').appendChild(row);
+            console.log([...ler()]);
+            salvar([...ler(), veiculo]);
         }
         function remover() { }
-        function salvar() { }
         function render() { }
         return { ler, adicionar, remover, salvar, render };
     }
